@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 6, 2019 4:41:31 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.entity.UserProfile" table="user_profile" catalog="nanofoxy_distributed_system" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="firstName" type="string">
+            <column name="firstName" length="45" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="lastName" length="45" />
+        </property>
+        <property name="phoneNumber" type="string">
+            <column name="phoneNumber" length="45" />
+        </property>
+        <property name="emailAddress" type="string">
+            <column name="emailAddress" length="145" />
+        </property>
+        <property name="createDateTime" type="timestamp">
+            <column name="createDateTime" length="19" />
+        </property>
+        <property name="updateDateTime" type="timestamp">
+            <column name="updateDateTime" length="19" />
+        </property>
+        <property name="isActive" type="java.lang.Boolean">
+            <column name="isActive" />
+        </property>
+        <set name="userLogins" table="user_login" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_profile_id" not-null="true" />
+            </key>
+            <one-to-many class="com.entity.UserLogin" />
+        </set>
+        <set name="userCarts" table="user_cart" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_profile_id" not-null="true" />
+            </key>
+            <one-to-many class="com.entity.UserCart" />
+        </set>
+    </class>
+</hibernate-mapping>

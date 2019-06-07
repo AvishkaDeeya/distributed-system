@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 6, 2019 4:41:31 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.entity.ItemProfile" table="item_profile" catalog="nanofoxy_distributed_system" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="itemCategory" class="com.entity.ItemCategory" fetch="select">
+            <column name="item_category_id" not-null="true" />
+        </many-to-one>
+        <property name="generatedId" type="string">
+            <column name="generatedID" length="45" />
+        </property>
+        <property name="itemName" type="string">
+            <column name="itemName" length="45" />
+        </property>
+        <property name="imageUrl" type="string">
+            <column name="imageUrl" length="145" />
+        </property>
+        <property name="price" type="java.lang.Double">
+            <column name="price" precision="22" scale="0" />
+        </property>
+        <property name="createDateTime" type="timestamp">
+            <column name="createDateTime" length="19" />
+        </property>
+        <property name="updateDateTime" type="timestamp">
+            <column name="updateDateTime" length="19" />
+        </property>
+        <property name="isActive" type="java.lang.Boolean">
+            <column name="isActive" />
+        </property>
+        <set name="userCartItems" table="user_cart_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="item_profile_id" not-null="true" />
+            </key>
+            <one-to-many class="com.entity.UserCartItem" />
+        </set>
+    </class>
+</hibernate-mapping>
